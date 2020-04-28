@@ -2,7 +2,7 @@ import time
 
 from core_data_modules.cleaners import Codes
 from core_data_modules.cleaners.cleaning_utils import CleaningUtils
-from core_data_modules.cleaners.location_tools import SomaliaLocations, KenyaLocations
+from core_data_modules.cleaners.location_tools import SomaliaLocations
 from core_data_modules.data_models.code_scheme import CodeTypes
 from core_data_modules.traced_data import Metadata
 
