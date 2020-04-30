@@ -99,8 +99,8 @@ if __name__ == "__main__":
             phone_numbers.add(f"+{uuid_phone_number_lut[uuid]}")
         else:
             skipped_uuids.add(uuid)
-    log.info(f"Successfully converted {len(phone_numbers)} uuids to phone numbers. "
-             f"Unable to re-identify {len(skipped_uuids)} uuids")
+    log.info(f"Successfully converted {len(phone_numbers)} uuids to phone numbers.")
+    log.warning(f"Unable to re-identify {len(skipped_uuids)} uuids")
 
     # Export contacts CSV
     log.warning(f"Exporting {len(phone_numbers)} phone numbers to {csv_output_file_path}...")
