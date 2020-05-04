@@ -335,6 +335,17 @@
       ]
     },
     {
+      "CodeID": "code-1ccdaa25",
+      "CodeType": "Normal",
+      "DisplayText": "s07e02",
+      "StringValue": "s07e02",
+      "NumericValue": 35,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "s07e02"
+      ]
+    },
+    {
       "CodeID": "code-de134fc1",
       "CodeType": "Normal",
       "DisplayText": "have voice",

@@ -17,6 +17,7 @@ DATA_ROOT=$3
 PROJECT_NAME="JPLG-2020"
 DATASETS=(
     "s07e01"
+    "s07e02"
 
     "location"
     "gender"
