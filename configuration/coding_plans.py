@@ -188,7 +188,7 @@ def get_survey_coding_plans(pipeline_name):
                        CodingConfiguration(
                            coding_mode=CodingModes.SINGLE,
                            code_scheme=CodeSchemes.HOUSEHOLD_LANGUAGE,
-                           cleaner=somali.DemographicCleaner.clean_yes_no,
+                           cleaner=None,
                            coded_field="household_language_coded",
                            analysis_file_key="household_language",
                            fold_strategy=FoldStrategies.assert_label_ids_equal
