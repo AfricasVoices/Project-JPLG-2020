@@ -88,8 +88,7 @@ def get_survey_coding_plans(pipeline_name):
                            code_scheme=CodeSchemes.MOGADISHU_SUB_DISTRICT,
                            cleaner=somali.DemographicCleaner.clean_mogadishu_sub_district,
                            coded_field="mogadishu_sub_district_coded",
-                           # This code exists for compatibility with the previous CSAP demog datasets.
-                           # Not including in the analysis file because this project is not in Mogadishu.
+                           analysis_file_key="mogadishu_sub_district",
                            fold_strategy=FoldStrategies.assert_label_ids_equal
                        ),
                        CodingConfiguration(
