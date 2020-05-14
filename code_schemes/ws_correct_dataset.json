@@ -346,6 +346,17 @@
       ]
     },
     {
+      "CodeID": "code-9d20320f",
+      "CodeType": "Normal",
+      "DisplayText": "s07e03",
+      "StringValue": "s07e03",
+      "NumericValue": 36,
+      "VisibleInCoda": true,
+      "MatchValues": [
+        "s07e03"
+      ]
+    },
+    {
       "CodeID": "code-de134fc1",
       "CodeType": "Normal",
       "DisplayText": "have voice",
