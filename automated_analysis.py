@@ -377,23 +377,6 @@ if __name__ == "__main__":
         for sample in samples:
             writer.writerow(sample)
 
-    log.info("Loading the Mogadishu sub-district geojson...")
-    mogadishu_map = geopandas.read_file("geojson/mogadishu_sub_districts.geojson")
-
-    log.info("Generating a map of Mogadishu participation for the season...")
-    mogadishu_frequencies = dict()
-    for code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
-        if code.code_type == CodeTypes.NORMAL:
-            mogadishu_frequencies[code.string_value] = demographic_distributions["mogadishu_sub_district"][code.string_value]
-
-    fig, ax = plt.subplots()
-    MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_frequencies, ax=ax,
-                                    label_position_columns=("ADM3_LX", "ADM3_LY"))
-    plt.savefig(f"{output_dir}/maps/mogadishu/mogadishu_total_participants.png", dpi=1200, bbox_inches="tight")
-    plt.close(fig)
-
-    exit(0)
-
     log.info("Loading the Somali regions geojson...")
     regions_map = geopandas.read_file("geojson/somalia_regions.geojson")
 
@@ -510,6 +493,22 @@ if __name__ == "__main__":
                 plt.close(fig)
 
                 map_index += 1
+
+    log.info("Loading the Mogadishu sub-district geojson...")
+    mogadishu_map = geopandas.read_file("geojson/mogadishu_sub_districts.geojson")
+
+    log.info("Generating a map of Mogadishu participation for the season...")
+    mogadishu_frequencies = dict()
+    for code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
+        if code.code_type == CodeTypes.NORMAL:
+            mogadishu_frequencies[code.string_value] = demographic_distributions["mogadishu_sub_district"][
+                code.string_value]
+
+    fig, ax = plt.subplots()
+    MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_frequencies, ax=ax,
+                                    label_position_columns=("ADM3_LX", "ADM3_LY"))
+    plt.savefig(f"{output_dir}/maps/mogadishu/mogadishu_total_participants.png", dpi=1200, bbox_inches="tight")
+    plt.close(fig)
 
     log.info("Graphing the per-episode engagement counts...")
     # Graph the number of messages in each episode
