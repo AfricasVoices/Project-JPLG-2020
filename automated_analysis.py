@@ -1,6 +1,6 @@
 import argparse
-import json
 import csv
+import json
 import random
 from collections import OrderedDict
 from glob import glob
@@ -387,7 +387,8 @@ if __name__ == "__main__":
             mogadishu_frequencies[code.string_value] = demographic_distributions["mogadishu_sub_district"][code.string_value]
 
     fig, ax = plt.subplots()
-    MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_frequencies, ax=ax)
+    MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_frequencies, ax=ax,
+                                    label_position_columns=("ADM3_LX", "ADM3_LY"))
     plt.savefig(f"{output_dir}/maps/mogadishu/mogadishu_total_participants.png", dpi=1200, bbox_inches="tight")
     plt.close(fig)
 
