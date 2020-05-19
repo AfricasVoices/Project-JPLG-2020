@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas
+from core_data_modules.logging import Logger
 from mapclassify import FisherJenks
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import Patch
+
+log = Logger(__name__)
 
 
 class MappingUtils(object):
@@ -86,6 +89,13 @@ class MappingUtils(object):
         # TODO: Modify once per-map configuration needs are better understood by testing on other maps.
         if label_position_columns is not None:
             for i, admin_region in geo_data.iterrows():
+                # Skip rows that don't have a label x/y position set.
+                # If we don't skip here, we'll get a very cryptic StopIteration error much later.
+                if pandas.isna(admin_region[label_position_columns[0]]) or \
+                        pandas.isna(admin_region[label_position_columns[1]]):
+                    log.warning(f"No label positions provided for admin region '{admin_region[admin_id_column]}'")
+                    continue
+
                 # Set label and callout positions from the features in the geo_data,
                 # translating from the geo_data format to the matplotlib format.
                 if callout_position_columns is None or pandas.isna(admin_region[callout_position_columns[0]]):
