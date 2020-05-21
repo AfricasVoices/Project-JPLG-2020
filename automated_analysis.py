@@ -538,14 +538,14 @@ if __name__ == "__main__":
                 log.info(f"Generating a map of Mogadishu participation for {theme}...")
                 demographic_counts = episode[theme]
 
-                theme_mogadishu_frequencies = dict()
+                mogadishu_theme_frequencies = dict()
                 for sub_district_code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
                     if sub_district_code.code_type == CodeTypes.NORMAL:
-                        theme_mogadishu_frequencies[sub_district_code.string_value] = \
+                        mogadishu_theme_frequencies[sub_district_code.string_value] = \
                             demographic_counts[f"mogadishu_sub_district:{sub_district_code.string_value}"]
 
                 fig, ax = plt.subplots()
-                MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", theme_mogadishu_frequencies, ax=ax,
+                MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_theme_frequencies, ax=ax,
                                                 label_position_columns=("ADM3_LX", "ADM3_LY"))
                 plt.savefig(
                     f"{output_dir}/maps/mogadishu/mogadishu_{cc.analysis_file_key}_{map_index}_{code.string_value}.png",
