@@ -1,6 +1,6 @@
 import argparse
-import json
 import csv
+import json
 import random
 from collections import OrderedDict
 from glob import glob
@@ -58,6 +58,7 @@ if __name__ == "__main__":
     IOUtils.ensure_dirs_exist(output_dir)
     IOUtils.ensure_dirs_exist(f"{output_dir}/maps/regions")
     IOUtils.ensure_dirs_exist(f"{output_dir}/maps/districts")
+    IOUtils.ensure_dirs_exist(f"{output_dir}/maps/mogadishu")
     IOUtils.ensure_dirs_exist(f"{output_dir}/graphs")
 
     log.info("Loading Pipeline Configuration File...")
@@ -493,6 +494,66 @@ if __name__ == "__main__":
 
                 map_index += 1
 
+    log.info("Loading the Mogadishu sub-district geojson...")
+    mogadishu_map = geopandas.read_file("geojson/mogadishu_sub_districts.geojson")
+
+    log.info("Generating a map of Mogadishu participation for the season...")
+    mogadishu_frequencies = dict()
+    for code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
+        if code.code_type == CodeTypes.NORMAL:
+            mogadishu_frequencies[code.string_value] = demographic_distributions["mogadishu_sub_district"][
+                code.string_value]
+
+    fig, ax = plt.subplots()
+    MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_frequencies, ax=ax,
+                                    label_position_columns=("ADM3_LX", "ADM3_LY"))
+    plt.savefig(f"{output_dir}/maps/mogadishu/mogadishu_total_participants.png", dpi=1200, bbox_inches="tight")
+    plt.close(fig)
+
+    for plan in PipelineConfiguration.RQA_CODING_PLANS:
+        episode = episodes[plan.raw_field]
+
+        for cc in plan.coding_configurations:
+            # Plot a map of the total relevant participants for this coding configuration.
+            rqa_total_mogadishu_frequencies = dict()
+            for sub_district_code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
+                if sub_district_code.code_type == CodeTypes.NORMAL:
+                    rqa_total_mogadishu_frequencies[sub_district_code.string_value] = \
+                        episode["Total Relevant Participants"][f"mogadishu_sub_district:{sub_district_code.string_value}"]
+
+            fig, ax = plt.subplots()
+            MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", rqa_total_mogadishu_frequencies, ax=ax,
+                                            label_position_columns=("ADM3_LX", "ADM3_LY"))
+            plt.savefig(f"{output_dir}/maps/mogadishu/mogadishu_{cc.analysis_file_key}_1_total_relevant.png",
+                        dpi=1200, bbox_inches="tight")
+            plt.close(fig)
+
+            # Plot maps of each of the normal themes for this coding configuration.
+            map_index = 2  # (index 1 was used in the total relevant map's filename).
+            for code in cc.code_scheme.codes:
+                if code.code_type != CodeTypes.NORMAL:
+                    continue
+
+                theme = f"{cc.analysis_file_key}{code.string_value}"
+                log.info(f"Generating a map of Mogadishu participation for {theme}...")
+                demographic_counts = episode[theme]
+
+                mogadishu_theme_frequencies = dict()
+                for sub_district_code in CodeSchemes.MOGADISHU_SUB_DISTRICT.codes:
+                    if sub_district_code.code_type == CodeTypes.NORMAL:
+                        mogadishu_theme_frequencies[sub_district_code.string_value] = \
+                            demographic_counts[f"mogadishu_sub_district:{sub_district_code.string_value}"]
+
+                fig, ax = plt.subplots()
+                MappingUtils.plot_frequency_map(mogadishu_map, "ADM3_AVF", mogadishu_theme_frequencies, ax=ax,
+                                                label_position_columns=("ADM3_LX", "ADM3_LY"))
+                plt.savefig(
+                    f"{output_dir}/maps/mogadishu/mogadishu_{cc.analysis_file_key}_{map_index}_{code.string_value}.png",
+                    dpi=1200, bbox_inches="tight")
+                plt.close(fig)
+
+                map_index += 1
+
     log.info("Graphing the per-episode engagement counts...")
     # Graph the number of messages in each episode
     fig = px.bar([x for x in engagement_counts.values() if x["Episode"] != "Total"],
@@ -649,6 +710,15 @@ if __name__ == "__main__":
             log.info(f"Uploading map {i + 1}/{len(paths_to_upload)}: {path}...")
             drive_client_wrapper.update_or_create(
                 path, f"{pipeline_configuration.drive_upload.analysis_graphs_dir}/maps/districts/",
+                target_folder_is_shared_with_me=True
+            )
+
+        log.info("Uploading Mogadishu maps to Drive...")
+        paths_to_upload = glob(f"{output_dir}/maps/mogadishu/*.png")
+        for i, path in enumerate(paths_to_upload):
+            log.info(f"Uploading map {i + 1}/{len(paths_to_upload)}: {path}...")
+            drive_client_wrapper.update_or_create(
+                path, f"{pipeline_configuration.drive_upload.analysis_graphs_dir}/maps/mogadishu/",
                 target_folder_is_shared_with_me=True
             )
     else:
