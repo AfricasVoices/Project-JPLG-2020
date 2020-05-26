@@ -35,7 +35,8 @@
         "csap_s04_demog",
         "csap_s05_demog",
         "csap_s06_demog",
-        "csap_s07_demog"
+        "csap_s07_demog",
+        "csap_s07_follow_up"
       ],
       "TestContactUUIDs": [
         "61e74e0b-1b4a-41fe-9e78-712f2a048f4e",
@@ -141,7 +142,10 @@
     {"RapidProKey": "Idp_Camp (Text) - csap_s07_demog", "PipelineKey": "in_idp_camp_raw"},
     {"RapidProKey": "Idp_Camp (Time) - csap_s07_demog", "PipelineKey": "in_idp_camp_time"},
     {"RapidProKey": "Hh_Language (Text) - csap_s07_demog", "PipelineKey": "household_language_raw"},
-    {"RapidProKey": "Hh_Language (Time) - csap_s07_demog", "PipelineKey": "household_language_time"}
+    {"RapidProKey": "Hh_Language (Time) - csap_s07_demog", "PipelineKey": "household_language_time"},
+
+    {"RapidProKey": "Csap_S07_Follow_Up (Text) - csap_s07_follow_up", "PipelineKey":  "government_priority_raw"},
+    {"RapidProKey": "Csap_S07_Follow_Up (Time) - csap_s07_follow_up", "PipelineKey":  "government_priority_time"}
   ],
   "ProjectStartDate": "2020-05-03T00:00:00+03:00",
   "ProjectEndDate": "2100-01-01T00:00+03:00",
