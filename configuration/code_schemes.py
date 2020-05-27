@@ -30,4 +30,7 @@ class CodeSchemes(object):
 
     GOVERNMENT_PRIORITY = _open_scheme("government_priority.json")
 
+    HAVE_VOICE = _open_scheme("have_voice.json")
+    SUGGESTIONS = _open_scheme("suggestions.json")
+
     WS_CORRECT_DATASET = _open_scheme("ws_correct_dataset.json")

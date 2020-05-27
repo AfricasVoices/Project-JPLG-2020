@@ -28,6 +28,9 @@ DATASETS=(
     "household_language"
 
     "government_priority"
+
+    "have_voice"
+    "suggestions"
 )
 
 cd "$CODA_V2_ROOT/data_tools"
