@@ -82,7 +82,7 @@ def get_rqa_coding_plans(pipeline_name):
     ]
 
 
-def get_survey_coding_plans(pipeline_name):
+def get_demog_coding_plans(pipeline_name):
     return [
         CodingPlan(raw_field="operator_raw",
                    coding_configurations=[
@@ -228,23 +228,27 @@ def get_survey_coding_plans(pipeline_name):
                        )
                    ],
                    ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("household language"),
-                   raw_field_fold_strategy=FoldStrategies.assert_equal),
+                   raw_field_fold_strategy=FoldStrategies.assert_equal)
+    ]
 
+
+def get_follow_up_coding_plans(survey_name):
+    return [
         CodingPlan(raw_field="government_priority_raw",
                    time_field="government_priority_time",
                    coda_filename="government_priority.json",
                    coding_configurations=[
                        CodingConfiguration(
-                           coding_mode=CodingModes.SINGLE,
+                           coding_mode=CodingModes.MULTIPLE,
                            code_scheme=CodeSchemes.GOVERNMENT_PRIORITY,
                            cleaner=None,
                            coded_field="government_priority_coded",
                            analysis_file_key="government_priority",
-                           fold_strategy=FoldStrategies.assert_label_ids_equal
+                           fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.GOVERNMENT_PRIORITY, x, y)
                        )
                    ],
                    ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s07 government priority"),
-                   raw_field_fold_strategy=FoldStrategies.assert_equal)
+                   raw_field_fold_strategy=FoldStrategies.concatenate)
     ]
 
 

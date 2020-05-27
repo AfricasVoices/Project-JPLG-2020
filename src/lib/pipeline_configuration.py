@@ -60,12 +60,12 @@ class PipelineConfiguration(object):
         self.data_archive_upload_url_prefix = data_archive_upload_url_prefix
 
         PipelineConfiguration.RQA_CODING_PLANS = coding_plans.get_rqa_coding_plans(self.pipeline_name)
-        PipelineConfiguration.SURVEY_CODING_PLANS = coding_plans.get_survey_coding_plans(self.pipeline_name)
 
-        # TODO: This is a temporary hack to extract demographics out of the surveys, so that the
-        #       automated analysis can analyse demographics only. Not fixing this properly here for now, because we may
-        #       instead decide to analysis all of the survey questions in the same way as we do the demographics.
-        PipelineConfiguration.DEMOG_CODING_PLANS = coding_plans.get_survey_coding_plans(self.pipeline_name)[0:5]
+        PipelineConfiguration.DEMOG_CODING_PLANS = coding_plans.get_demog_coding_plans(self.pipeline_name)
+        PipelineConfiguration.FOLLOW_UP_CODING_PLANS = coding_plans.get_follow_up_coding_plans(self.pipeline_name)
+        PipelineConfiguration.SURVEY_CODING_PLANS = \
+            PipelineConfiguration.DEMOG_CODING_PLANS + PipelineConfiguration.FOLLOW_UP_CODING_PLANS
+
         PipelineConfiguration.WS_CORRECT_DATASET_SCHEME = coding_plans.get_ws_correct_dataset_scheme(self.pipeline_name)
 
         self.validate()

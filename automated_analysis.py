@@ -174,7 +174,7 @@ if __name__ == "__main__":
     # TODO: Report percentages?
     # TODO: Handle distributions for other variables too or just demographics?
     demographic_distributions = OrderedDict()  # of analysis_file_key -> code string_value -> number of individuals
-    for plan in PipelineConfiguration.SURVEY_CODING_PLANS:
+    for plan in PipelineConfiguration.DEMOG_CODING_PLANS:
         for cc in plan.coding_configurations:
             if cc.analysis_file_key is None:
                 continue
@@ -189,7 +189,7 @@ if __name__ == "__main__":
         if ind["consent_withdrawn"] == Codes.TRUE:
             continue
 
-        for plan in PipelineConfiguration.SURVEY_CODING_PLANS:
+        for plan in PipelineConfiguration.DEMOG_CODING_PLANS:
             for cc in plan.coding_configurations:
                 if cc.analysis_file_key is None:
                     continue
