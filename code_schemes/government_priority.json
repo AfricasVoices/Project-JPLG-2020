@@ -3,7 +3,110 @@
   "Name": "Government Priority",
   "Version": "0.0.0.1",
   "Codes": [
-
+    {
+      "CodeID": "code-3aa5c387",
+      "CodeType": "Normal",
+      "DisplayText": "enforce stricter measures",
+      "NumericValue": 1,
+      "StringValue": "enforce_stricter_measures",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-379960f2",
+      "CodeType": "Normal",
+      "DisplayText": "increase efforts",
+      "NumericValue": 2,
+      "StringValue": "increase_efforts",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-f5ffe51a",
+      "CodeType": "Normal",
+      "DisplayText": "healthcare",
+      "NumericValue": 3,
+      "StringValue": "healthcare",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-97247d6b",
+      "CodeType": "Normal",
+      "DisplayText": "financial support",
+      "NumericValue": 4,
+      "StringValue": "financial_support",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-2249ea1e",
+      "CodeType": "Normal",
+      "DisplayText": "general support",
+      "NumericValue": 5,
+      "StringValue": "general_support",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-8de09a85",
+      "CodeType": "Normal",
+      "DisplayText": "raise awareness",
+      "NumericValue": 6,
+      "StringValue": "raise_awareness",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-b6bfa7c5",
+      "CodeType": "Normal",
+      "DisplayText": "call for right practice",
+      "NumericValue": 7,
+      "StringValue": "call_for_right_practice",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-e9cbebbc",
+      "CodeType": "Normal",
+      "DisplayText": "religious hope/practice",
+      "NumericValue": 8,
+      "StringValue": "religious_hope_practice",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-ba66739a",
+      "CodeType": "Normal",
+      "DisplayText": "doing a good job",
+      "NumericValue": 9,
+      "StringValue": "doing_a_good_job",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-295c6915",
+      "CodeType": "Normal",
+      "DisplayText": "hygiene",
+      "NumericValue": 10,
+      "StringValue": "hygiene",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-249ba1b9",
+      "CodeType": "Normal",
+      "DisplayText": "IDPs",
+      "NumericValue": 11,
+      "StringValue": "idps",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-27a60d84",
+      "CodeType": "Normal",
+      "DisplayText": "rumour/misinfo",
+      "NumericValue": 12,
+      "StringValue": "rumour_misinfo",
+      "VisibleInCoda": true
+    },
+    {
+      "CodeID": "code-6ee7b6e9",
+      "CodeType": "Normal",
+      "DisplayText": "other",
+      "NumericValue": 13,
+      "StringValue": "other",
+      "VisibleInCoda": true
+    },
     {
       "CodeID": "code-NA-f93d3eb7",
       "CodeType": "Control",
