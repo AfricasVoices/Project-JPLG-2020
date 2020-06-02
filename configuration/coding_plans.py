@@ -39,7 +39,7 @@ def get_rqa_coding_plans(pipeline_name):
                            coding_mode=CodingModes.MULTIPLE,
                            code_scheme=CodeSchemes.S07E01,
                            coded_field="rqa_s07e01_coded",
-                           analysis_file_key="rqa_s07e01_",
+                           analysis_file_key="rqa_s07e01",
                            fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E01, x, y)
                        )
                    ],
@@ -56,7 +56,7 @@ def get_rqa_coding_plans(pipeline_name):
                            coding_mode=CodingModes.MULTIPLE,
                            code_scheme=CodeSchemes.S07E02,
                            coded_field="rqa_s07e02_coded",
-                           analysis_file_key="rqa_s07e02_",
+                           analysis_file_key="rqa_s07e02",
                            fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E02, x, y)
                        )
                    ],
@@ -73,7 +73,7 @@ def get_rqa_coding_plans(pipeline_name):
                            coding_mode=CodingModes.MULTIPLE,
                            code_scheme=CodeSchemes.S07E03,
                            coded_field="rqa_s07e03_coded",
-                           analysis_file_key="rqa_s07e03_",
+                           analysis_file_key="rqa_s07e03",
                            fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E03, x, y)
                        )
                    ],
@@ -274,7 +274,7 @@ def get_follow_up_coding_plans(survey_name):
                            coding_mode=CodingModes.MULTIPLE,
                            code_scheme=CodeSchemes.SUGGESTIONS,
                            coded_field="suggestions_coded",
-                           analysis_file_key="suggestions_",
+                           analysis_file_key="suggestions",
                            fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.SUGGESTIONS, x, y)
                        )
                    ],
