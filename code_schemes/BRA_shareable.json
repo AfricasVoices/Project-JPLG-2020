@@ -1,0 +1,17 @@
+{
+  "SchemeID": "Scheme-58781eb2",
+  "Name": "BRA Shareable",
+  "Version": "0.0.0.1",
+  "Codes": [
+    {
+      "CodeID": "code-DNS-982f3ca2",
+      "CodeType": "Control",
+      "ControlCode": "DNS",
+      "DisplayText": "DNS (do not share)",
+      "NumericValue": -120,
+      "StringValue": "DNS",
+      "Shortcut": "d",
+      "VisibleInCoda": true
+    }
+  ]
+}
