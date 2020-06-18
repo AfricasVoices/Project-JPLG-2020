@@ -78,7 +78,7 @@ if __name__ == "__main__":
                  "json was set to 'false')")
 
     log.info("Auto Coding...")
-    data = AutoCode.auto_code(user, data, pipeline_configuration, icr_output_dir, coded_dir_path)
+    data = AutoCode.auto_code(user, data, pipeline_configuration, prev_coded_dir_path, icr_output_dir, coded_dir_path)
 
     log.info("Exporting production CSV...")
     data = ProductionFile.generate(data, production_csv_output_path)

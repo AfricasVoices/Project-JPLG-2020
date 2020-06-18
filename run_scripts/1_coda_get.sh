@@ -20,6 +20,9 @@ DATASETS=(
     "s07e02"
     "s07e03"
 
+    "BRA_shareable"
+    "BRA_s07e03"
+
     "location"
     "gender"
     "age"

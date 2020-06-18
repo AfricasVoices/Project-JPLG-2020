@@ -53,7 +53,8 @@ class AutoCode(object):
         cls.log_empty_string_stats_for_field(survey_data.values(), raw_survey_fields)
 
     @classmethod
-    def filter_messages(cls, data, project_start_date, project_end_date, filter_test_messages=True):
+    def filter_messages(cls, data, project_start_date, project_end_date,
+                        filter_test_messages=True, dns_dataset_file_path=None):
         # Filter out test messages sent by AVF.
         if filter_test_messages:
             data = MessageFilters.filter_test_messages(data)
@@ -68,6 +69,11 @@ class AutoCode(object):
         # Filter out runs sent outwith the project start and end dates
         time_keys = {plan.time_field for plan in PipelineConfiguration.RQA_CODING_PLANS}
         data = MessageFilters.filter_time_range(data, time_keys, project_start_date, project_end_date)
+
+        # Filter out messages in the set of messages marked as 'DNS'.
+        if dns_dataset_file_path is not None:
+            data = MessageFilters.filter_dns_messages(
+                data, [plan.raw_field for plan in PipelineConfiguration.RQA_CODING_PLANS], dns_dataset_file_path)
 
         return data
 
@@ -116,9 +122,16 @@ class AutoCode(object):
                 )
 
     @classmethod
-    def auto_code(cls, user, data, pipeline_configuration, icr_output_dir, coda_output_dir):
-        data = cls.filter_messages(data, pipeline_configuration.project_start_date,
-                                   pipeline_configuration.project_end_date, pipeline_configuration.filter_test_messages)
+    def auto_code(cls, user, data, pipeline_configuration, coda_input_dir, icr_output_dir, coda_output_dir):
+        dns_dataset_file_path = None
+        if pipeline_configuration.dns_dataset is not None:
+            dns_dataset_file_path = f"{coda_input_dir}/{pipeline_configuration.dns_dataset}"
+
+        data = cls.filter_messages(data,
+                                   pipeline_configuration.project_start_date,
+                                   pipeline_configuration.project_end_date,
+                                   pipeline_configuration.filter_test_messages,
+                                   dns_dataset_file_path)
 
         cls.run_cleaners(user, data)
         cls.export_coda(user, data, coda_output_dir)

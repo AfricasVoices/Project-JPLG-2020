@@ -18,7 +18,8 @@ class PipelineConfiguration(object):
     
     def __init__(self, pipeline_name, raw_data_sources, phone_number_uuid_table, timestamp_remappings,
                  rapid_pro_key_remappings, project_start_date, project_end_date, filter_test_messages, move_ws_messages,
-                 memory_profile_upload_url_prefix, data_archive_upload_url_prefix, drive_upload=None):
+                 memory_profile_upload_url_prefix, data_archive_upload_url_prefix,
+                 dns_dataset=None, drive_upload=None):
         """
         :param pipeline_name: The name of this pipeline.
         :type pipeline_name: str
@@ -55,6 +56,7 @@ class PipelineConfiguration(object):
         self.project_end_date = project_end_date
         self.filter_test_messages = filter_test_messages
         self.move_ws_messages = move_ws_messages
+        self.dns_dataset = dns_dataset
         self.drive_upload = drive_upload
         self.memory_profile_upload_url_prefix = memory_profile_upload_url_prefix
         self.data_archive_upload_url_prefix = data_archive_upload_url_prefix
@@ -101,6 +103,7 @@ class PipelineConfiguration(object):
         project_end_date = isoparse(configuration_dict["ProjectEndDate"])
 
         filter_test_messages = configuration_dict["FilterTestMessages"]
+        dns_dataset = configuration_dict.get("DNSDataset")
         move_ws_messages = configuration_dict["MoveWSMessages"]
 
         drive_upload_paths = None
@@ -113,7 +116,7 @@ class PipelineConfiguration(object):
         return cls(pipeline_name, raw_data_sources, phone_number_uuid_table, timestamp_remappings,
                    rapid_pro_key_remappings, project_start_date, project_end_date, filter_test_messages,
                    move_ws_messages, memory_profile_upload_url_prefix, data_archive_upload_url_prefix,
-                   drive_upload_paths)
+                   dns_dataset, drive_upload_paths)
 
     @classmethod
     def from_configuration_file(cls, f):

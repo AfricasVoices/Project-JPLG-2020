@@ -28,58 +28,78 @@ def clean_district_if_no_mogadishu_sub_district(text):
 
 
 def get_rqa_coding_plans(pipeline_name):
-    return [
-        CodingPlan(raw_field="rqa_s07e01_raw",
-                   time_field="sent_on",
-                   run_id_field="rqa_s07e01_run_id",
-                   coda_filename="s07e01.json",
-                   icr_filename="s07e01.csv",
-                   coding_configurations=[
-                       CodingConfiguration(
-                           coding_mode=CodingModes.MULTIPLE,
-                           code_scheme=CodeSchemes.S07E01,
-                           coded_field="rqa_s07e01_coded",
-                           analysis_file_key="rqa_s07e01",
-                           fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E01, x, y)
-                       )
-                   ],
-                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s07e01"),
-                   raw_field_fold_strategy=FoldStrategies.concatenate),
+    if pipeline_name == "JPLG-2020-BRA":
+        return [
+            CodingPlan(raw_field="rqa_s07e03_raw",
+                       time_field="sent_on",
+                       run_id_field="rqa_s07e03_run_id",
+                       coda_filename="BRA_s07e03.json",
+                       icr_filename="s07e03.csv",
+                       coding_configurations=[
+                           CodingConfiguration(
+                               coding_mode=CodingModes.MULTIPLE,
+                               code_scheme=CodeSchemes.BRA_S07E03,
+                               coded_field="rqa_s07e03_coded",
+                               analysis_file_key="rqa_s07e03",
+                               fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.BRA_S07E03, x, y)
+                           )
+                       ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s07e03"),
+                       raw_field_fold_strategy=FoldStrategies.concatenate)
+        ]
+    else:
+        return [
+            CodingPlan(raw_field="rqa_s07e01_raw",
+                       time_field="sent_on",
+                       run_id_field="rqa_s07e01_run_id",
+                       coda_filename="s07e01.json",
+                       icr_filename="s07e01.csv",
+                       coding_configurations=[
+                           CodingConfiguration(
+                               coding_mode=CodingModes.MULTIPLE,
+                               code_scheme=CodeSchemes.S07E01,
+                               coded_field="rqa_s07e01_coded",
+                               analysis_file_key="rqa_s07e01",
+                               fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E01, x, y)
+                           )
+                       ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s07e01"),
+                       raw_field_fold_strategy=FoldStrategies.concatenate),
 
-        CodingPlan(raw_field="rqa_s07e02_raw",
-                   time_field="sent_on",
-                   run_id_field="rqa_s07e02_run_id",
-                   coda_filename="s07e02.json",
-                   icr_filename="s07e02.csv",
-                   coding_configurations=[
-                       CodingConfiguration(
-                           coding_mode=CodingModes.MULTIPLE,
-                           code_scheme=CodeSchemes.S07E02,
-                           coded_field="rqa_s07e02_coded",
-                           analysis_file_key="rqa_s07e02",
-                           fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E02, x, y)
-                       )
-                   ],
-                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s07e02"),
-                   raw_field_fold_strategy=FoldStrategies.concatenate),
+            CodingPlan(raw_field="rqa_s07e02_raw",
+                       time_field="sent_on",
+                       run_id_field="rqa_s07e02_run_id",
+                       coda_filename="s07e02.json",
+                       icr_filename="s07e02.csv",
+                       coding_configurations=[
+                           CodingConfiguration(
+                               coding_mode=CodingModes.MULTIPLE,
+                               code_scheme=CodeSchemes.S07E02,
+                               coded_field="rqa_s07e02_coded",
+                               analysis_file_key="rqa_s07e02",
+                               fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E02, x, y)
+                           )
+                       ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s07e02"),
+                       raw_field_fold_strategy=FoldStrategies.concatenate),
 
-        CodingPlan(raw_field="rqa_s07e03_raw",
-                   time_field="sent_on",
-                   run_id_field="rqa_s07e03_run_id",
-                   coda_filename="s07e03.json",
-                   icr_filename="s07e03.csv",
-                   coding_configurations=[
-                       CodingConfiguration(
-                           coding_mode=CodingModes.MULTIPLE,
-                           code_scheme=CodeSchemes.S07E03,
-                           coded_field="rqa_s07e03_coded",
-                           analysis_file_key="rqa_s07e03",
-                           fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E03, x, y)
-                       )
-                   ],
-                   ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s07e03"),
-                   raw_field_fold_strategy=FoldStrategies.concatenate)
-    ]
+            CodingPlan(raw_field="rqa_s07e03_raw",
+                       time_field="sent_on",
+                       run_id_field="rqa_s07e03_run_id",
+                       coda_filename="s07e03.json",
+                       icr_filename="s07e03.csv",
+                       coding_configurations=[
+                           CodingConfiguration(
+                               coding_mode=CodingModes.MULTIPLE,
+                               code_scheme=CodeSchemes.S07E03,
+                               coded_field="rqa_s07e03_coded",
+                               analysis_file_key="rqa_s07e03",
+                               fold_strategy=lambda x, y: FoldStrategies.list_of_labels(CodeSchemes.S07E03, x, y)
+                           )
+                       ],
+                       ws_code=CodeSchemes.WS_CORRECT_DATASET.get_code_with_match_value("s07e03"),
+                       raw_field_fold_strategy=FoldStrategies.concatenate)
+        ]
 
 
 def get_demog_coding_plans(pipeline_name):

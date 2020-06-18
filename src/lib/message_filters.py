@@ -1,3 +1,6 @@
+import json
+
+from core_data_modules.data_models import Message
 from core_data_modules.logging import Logger
 from dateutil.parser import isoparse
 
@@ -122,5 +125,28 @@ class MessageFilters(object):
         log.debug("Filtering out messages identified as noise...")
         filtered = [td for td in messages if not noise_fn(td.get(message_key))]
         log.info(f"Filtered out messages identified as noise. "
+                 f"Returning {len(filtered)}/{len(messages)} messages.")
+        return filtered
+
+    @staticmethod
+    def filter_dns_messages(messages, message_keys, dns_dataset_file_path):
+        # This approach uses hard-coded code ids because it is experimental for this project and the control code
+        # is not yet standardised. It interprets the Coda file directly for simplicity under the constraints of
+        # the one-off coding that was done here. In future, we'll probably want to code DNS during the first pass
+        # labelling and use the same approach as we use for filtering noise messages.
+        dns_messages = set()
+        with open(dns_dataset_file_path) as f:
+            dns_dataset = [Message.from_firebase_map(m) for m in json.load(f)]
+        for msg in dns_dataset:
+            if len(msg.labels) > 0 and msg.labels[0].code_id == "code-DNS-982f3ca2":
+                dns_messages.add(msg.text)
+
+        log.debug("Filtering out messages labelled as 'do not share'...")
+        filtered = []
+        for msg in messages:
+            for key in message_keys:
+                if msg[key] not in dns_messages:
+                    filtered.append(msg)
+        log.info(f"Filtered out messages labelled as 'do not share'. "
                  f"Returning {len(filtered)}/{len(messages)} messages.")
         return filtered
